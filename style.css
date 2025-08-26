@@ -77,6 +77,7 @@ header {
   z-index: 1000;
   transition: var(--transition);
 }
+
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -1112,5 +1113,41 @@ footer {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: row; /* Change column → row */
+    align-items: center; /* Centrer verticalement */
+    flex-wrap: nowrap;
+    padding: 12px 0;
+  }
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    z-index: 100;
+    flex-direction: column;
+    padding: 18px 0;
+  }
+  .nav-menu.active {
+    display: flex;
+  }
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+  .header-actions {
+    display: none;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
   }
 }
