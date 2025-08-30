@@ -1,6 +1,7 @@
 .main-header {
-  background: linear-gradient(90deg, #fff 80%, #eaf6f6 100%);
-  box-shadow: 0 2px 18px rgba(65, 193, 48, 0.07);
+  /* flat header background */
+  background: #ffffff;
+  box-shadow: 0 6px 24px rgba(16, 24, 32, 0.06);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -18,7 +19,7 @@
   font-family: "Montserrat", Arial, sans-serif;
   font-weight: 700;
   font-size: 1.45rem;
-  color: #e6730f;
+  color: var(--primary);
   text-decoration: none;
   gap: 10px;
 }
@@ -67,27 +68,28 @@
   width: 100%;
 }
 .header-actions .btn-accent {
-  background: #41c130;
+  background: var(--accent);
   color: #fff;
   border-radius: 24px;
   padding: 8px 22px;
   font-weight: 500;
   font-size: 1rem;
   text-decoration: none;
-  transition: background 0.2s;
+  transition: background 0.2s, transform 0.12s;
   border: none;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(65, 193, 48, 0.09);
+  box-shadow: 0 6px 18px rgba(16, 24, 32, 0.06);
 }
 .header-actions .btn-accent:hover {
-  background: #fe8402;
+  background: var(--primary);
+  transform: translateY(-2px);
 }
 .menu-toggle {
   display: none;
   background: none;
   border: none;
   font-size: 2rem;
-  color: #41c130;
+  color: var(--accent);
   cursor: pointer;
   margin-left: 18px;
 }
@@ -95,13 +97,13 @@
   .nav-menu ul {
     flex-direction: column;
     gap: 18px;
-    background: #fff;
+    background: #ffffff;
     position: absolute;
     top: 72px;
     left: 0;
     right: 0;
-    padding: 24px 0;
-    box-shadow: 0 8px 32px rgba(65, 193, 48, 0.07);
+    padding: 24px 20px;
+    box-shadow: 0 12px 36px rgba(16, 24, 32, 0.08);
     display: none;
   }
   .nav-menu.active ul {
