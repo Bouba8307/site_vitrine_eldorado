@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Eldorado - Transformation des déchets plastiques en carburant</title>
+    <title>Tadji N'Gana - Transformation des déchets plastiques en carburant</title>
     <!-- Google Fonts & Animate.css -->
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap"
@@ -14,7 +14,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="style1.css" />
   </head>
   <body>
     <!-- Header -->
@@ -22,10 +21,11 @@
       <div class="container header-container">
         <a href="#" class="logo">
           <img src="eldo.png" alt="logo" class="logo-img" />
-          <span class="logo-text">Eldorado</span>
+          <span class="logo-text" style="font-weight: bold;color:#2e8b56;">ECO <span class="logo-highlight" style="color:#e52828;">TADJI</span></span>
         </a>
         <nav class="nav-menu">
           <ul>
+            <li><a href="#home" class="nav-link">Accueil</a></li>
             <li><a href="#mission" class="nav-link">Mission</a></li>
             <li><a href="#technology" class="nav-link">Technologie</a></li>
             <li><a href="#solutions" class="nav-link">Solutions</a></li>
@@ -36,17 +36,22 @@
         <div class="header-actions">
           <a href="#contact" class="btn btn-accent">Prendre Contact</a>
         </div>
-        <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+        <button class="menu-toggle" aria-label="Menu">
+          <span class="hamburger" aria-hidden="true"></span>
+        </button>
       </div>
     </header>
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
       <div class="floating-icons">
         <span class="floating-icon">♻️</span>
         <span class="floating-icon">⚡</span>
         <span class="floating-icon">🌱</span>
         <span class="floating-icon">💧</span>
+        <spam class="floating-icon" > 🧪 </spam>
         <span class="floating-icon">🔥</span>
+        <span class="floating-icon">⚡</span>
+
       </div>
       <div class="hero-content">
         <h1 class="hero-title animate__animated animate__fadeInDown">
@@ -67,29 +72,20 @@
           Créer de la valeur à partir des déchets tout en protégeant notre
           environnement
         </p>
-        <div class="mission-content">
+       <div class="mission-content align-center">
           <div class="mission-text">
-            <p>
-              Face à l'accumulation des déchets plastiques dans les rues, les
-              égouts et les rives du fleuve Niger, Eldorado s'est donné pour
-              mission de transformer ce défi environnemental en opportunité
-              économique.
-            </p>
-            <p>
-              Notre technologie de pyrogazéification convertit les déchets
-              plastiques en carburant de haute qualité, réduisant ainsi la
-              pollution tout en créant des emplois locaux et en fournissant une
-              source d'énergie alternative.
-            </p>
-            <p>
-              Nous croyons fermement qu'une gestion durable des déchets est non
-              seulement bénéfique pour l'environnement, mais aussi
-              économiquement viable pour les communautés locales.
-            </p>
+            <div class="text-box" role="note">
+              <p>
+                Face à l'accumulation des déchets plastiques, EcoTadji 
+                transforme ce défi en opportunité : notre technologie de pyrogazéification convertit les plastiques en carburant propre, 
+                réduisant la pollution et créant des emplois locaux. 
+                Ensemble, nous bâtissons un avenir durable où les déchets deviennent une ressource précieuse.
+              </p>
+            </div>
           </div>
           <div class="mission-stats">
             <div class="stat-box animate__animated animate__bounceIn">
-              <div class="stat-number">3209</div>
+              <div class="stat-number">2000</div>
               <div class="stat-text">
                 mètres cubes de déchets produits quotidiennement dans la région
                 de Bamako
@@ -120,7 +116,7 @@
     <!-- Technology Section -->
     <section class="section technology" id="technology">
       <div class="container">
-        <h2 class="section-title">Notre Technologie</h2>
+        <h2 class="section-title">Notre Projet </h2>
         <p class="section-subtitle">
           La pyrogazéification : une solution innovante pour transformer les
           déchets plastiques
@@ -141,6 +137,31 @@
               Carburant
             </div>
           </div>
+          <!-- New professional steps layout: cards with icon + description -->
+         <div class="tech-advantages" > 
+           <div class="tech-steps" aria-label="Étapes de la technologie">
+            <article class="tech-step" id="step-collecte">
+              <div class="tech-step-icon" aria-hidden="true">♻️</div>
+              <h4 class="tech-step-title">Collecte & Préparation</h4>
+              <p class="tech-step-desc">Collecte ciblée des plastiques, tri initial et préparation pour le procédé (broyage, séchage).</p>
+            </article>
+            <article class="tech-step" id="step-tri">
+              <div class="tech-step-icon" aria-hidden="true">🔎</div>
+              <h4 class="tech-step-title">Tri & Sélection</h4>
+              <p class="tech-step-desc">Séparation des matériaux non adaptés, retrait des contaminants pour assurer un rendement constant.</p>
+            </article>
+            <article class="tech-step" id="step-pyro">
+              <div class="tech-step-icon" aria-hidden="true">🔥</div>
+              <h4 class="tech-step-title">Pyrogazéification</h4>
+              <p class="tech-step-desc">Procédé thermochimique contrôlé qui convertit la matière plastique en gaz et produits liquides.</p>
+            </article>
+            <article class="tech-step" id="step-carbu">
+              <div class="tech-step-icon" aria-hidden="true">⛽</div>
+              <h4 class="tech-step-title">Raffinage & Carburant</h4>
+              <p class="tech-step-desc">Traitement final et purification pour obtenir un carburant stable, compatible avec usages industriels.</p>
+            </article>
+          </div>
+         </div>
           <div class="tech-advantages">
             <div class="advantage-card">
               <div class="advantage-icon">♻️</div>
@@ -545,7 +566,7 @@
               <div class="info-icon">✉️</div>
               <div class="info-content">
                 <h4>Email</h4>
-                <p>projeteldorado2020@gmail.com</p>
+                <p>projetTadji N'Gana2020@gmail.com</p>
               </div>
             </div>
             <!-- Remplace le contenu de .map-container par la carte Google Maps -->
@@ -568,7 +589,7 @@
       <div class="container">
         <div class="footer-container">
           <div class="footer-col">
-            <h3>Eldorado</h3>
+            <h3>Tadji N'Gana</h3>
             <p>
               Transformer les déchets plastiques en ressources énergétiques pour
               un avenir plus durable.
@@ -613,7 +634,7 @@
           </div>
         </div>
         <div class="footer-bottom">
-          <p>© 2025 Eldorado. Tous droits réservés.</p>
+          <p>© 2025 Tadji N'Gana. Tous droits réservés.</p>
         </div>
       </div>
     </footer>
