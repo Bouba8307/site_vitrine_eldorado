@@ -1,5 +1,5 @@
 :root {
-  --primary: #fe8402;
+  --primary: #f82020;
   --issa: #fa7908;
   --secondary: #0d6efd;
   --accent: #41c130;
@@ -32,9 +32,9 @@ body {
 /* Utility Classes */
 .container {
   width: 92%;
-  max-width: 1200px;
+  max-width: 1240px; /* slightly wider for hero */
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 24px; /* larger inner gutters */
 }
 
 .section {
@@ -297,18 +297,39 @@ header {
 
 /* Hero Section background */
 .hero {
-  /* Remplace 'hero-bg.jpg' par le nom du fichier enregistré */
-  background: url("img/oil.jpg") no-repeat center center;
+  background: url("img/oil.png") no-repeat center center;
   background-size: cover;
   position: relative;
   /* Ajoute une superposition pour réduire l'opacité */
+  animation: heroBgAnim 25s ease-in-out infinite alternate;
 }
-.hero::after {
+
+@keyframes heroBgAnim {
+  0% {
+    background-position: center center;
+    filter: brightness(1) saturate(1);
+  }
+  50% {
+    background-position: center 40px;
+    filter: brightness(1.08) saturate(1.15);
+  }
+  100% {
+    background-position: center center;
+    filter: brightness(1) saturate(1);
+  }
+}
+.hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.32); /* ajuste l'opacité ici (0.32 = 32%) */
-  z-index: 1;
+  /* Dégradé transparent (foncé en haut, plus léger en bas) */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.32) 40%,
+    rgba(0, 0, 0, 0.22) 100%
+  );
+  z-index: 0; /* sous les icônes flottantes et le contenu */
   pointer-events: none;
 }
 .hero-content {
@@ -316,7 +337,7 @@ header {
   z-index: 2;
 }
 
-.hero::before {
+.hero::after {
   content: "";
   position: absolute;
   left: 0;
@@ -324,7 +345,8 @@ header {
   width: 100%;
   height: 100%;
   background: url("https://www.transparenttextures.com/patterns/diamond-upholstery.png");
-  opacity: 0.04;
+  opacity: 0.04; /* texture très légère au-dessus du bg, sous le contenu */
+  z-index: 0;
   pointer-events: none;
 }
 
@@ -344,7 +366,7 @@ header {
   font-size: 3.7rem;
   margin-bottom: 22px;
   font-family: var(--font-heading);
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 2px;
 }
 
@@ -403,7 +425,7 @@ header {
 .floating-icon:nth-child(5) {
   left: 70%;
   top: 10%;
-  animation-delay: 3s;
+  animation-delay: 1s;
 }
 
 @keyframes float {
@@ -419,95 +441,175 @@ header {
 }
 
 /* Mission Section */
-.mission-content {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 48px;
-  align-items: flex-start;
-  justify-content: space-between; /* disperse children across the row */
-}
-
-.mission-text {
-  flex: 1.2 1 0%;
-  min-width: 320px;
-  max-width: 640px; /* keep text column readable */
-  font-size: 1.15rem;
-  line-height: 1.7;
-}
-
-/* Text box styling similar to the provided image */
-.text-box {
-  background: linear-gradient(180deg, #fff8e6 0%, #fff 100%);
-  border-radius: 16px;
-  padding: 20px 24px;
-  box-shadow: 0 10px 30px rgba(16, 24, 32, 0.06);
-  border: 2px solid rgba(254, 132, 2, 0.08);
-  max-width: 100%;
+/* New mission layout to match mock */
+.mission-hero {
   position: relative;
-  margin: 0 auto;
-  font-size: 1.05rem;
-}
-
-/* small speech-tail at bottom-left */
-.text-box::after {
-  content: "";
-  position: absolute;
-  left: 28px;
-  bottom: -18px;
-  width: 0;
-  height: 0;
-  border-left: 14px solid transparent;
-  border-right: 14px solid transparent;
-  border-top: 18px solid #fff8e6;
-  filter: drop-shadow(0 4px 8px rgba(16, 24, 32, 0.04));
-}
-
-/* Ensure mission text and stats align center vertically on larger screens */
-.mission-content.align-center {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr; /* give more room to the heading */
+  gap: 32px;
   align-items: center;
-}
-
-.mission-stats {
-  flex: 1 1 320px;
-  min-width: 280px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  align-items: stretch; /* make stat-boxes take full width */
-}
-
-.stat-box {
-  background: #ffffff;
-  padding: 22px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-sm);
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  transition: var(--transition);
-  position: relative;
+  background: linear-gradient(90deg, #edf7ef 60%, #f1f6ff 60%);
+  border-radius: 24px;
+  padding: 56px 44px; /* more breathing room */
   overflow: hidden;
+  z-index: 1; /* base layer */
 }
 
-.stat-box {
-  width: 100%;
+.mission-left {
+  padding: 8px 8px 8px 24px;
 }
 
-.stat-box:hover {
-  box-shadow: 0 8px 32px rgba(65, 193, 48, 0.12);
-  transform: scale(1.03);
+.mission-badge {
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: 0.3px;
+}
+.mission-badge .eco {
+  color: #2e8b56;
+}
+.mission-badge .tadji {
+  color: #e52828;
 }
 
-.stat-number {
-  font-size: 2.7rem;
-  font-weight: bold;
-  color: var(--accent);
-  min-width: 120px;
-  text-align: center;
+.mission-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4.8vw, 3.2rem);
+  line-height: 1.18;
+  color: #111827;
+  margin-bottom: 18px;
+  font-weight: 800;
 }
 
-.stat-text {
+.mission-lead {
+  color: #6b7280;
   font-size: 1.05rem;
+}
+
+.mission-right {
+  display: flex;
+  justify-content: center;
+}
+.mission-figure {
+  position: relative;
+  width: min(440px, 94%);
+  isolation: isolate;
+}
+.mission-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 14px 30px rgba(16, 24, 32, 0.18));
+  position: relative;
+  z-index: 2; /* above shapes */
+}
+.mission-figure .shape {
+  position: relative;
+  border-radius: 50%;
+  opacity: 0.8;
+  filter: blur(0.2px);
+  z-index: -1; /* force behind image within hero */
+  pointer-events: none;
+}
+.mission-figure .s1 {
+  width: 120px;
+  height: 120px;
+  left: -16px;
+  top: 12%;
+  background: #ff6b3d;
+  border-radius: 28px;
+}
+.mission-figure .s2 {
+  width: 260px;
+  height: 260px;
+  right: -30px;
+  top: -10%;
+  background: #9ca3af; /* soft grey like the mock */
+  border-radius: 40px;
+}
+.mission-figure .s3 {
+  width: 90px;
+  height: 90px;
+  right: 19px;
+  bottom: -17px;
+  background: #2563eb;
+  border-radius: 24px;
+}
+
+.mission-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: -64px; /* stronger overlap */
+  position: relative;
+  z-index: 20; /* above mission-hero and orbs */
+  max-width: 1120px; /* keep cards aligned and not too wide */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mission-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(16, 24, 32, 0.1);
+  padding: 24px 22px 26px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.mission-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 56px rgba(16, 24, 32, 0.12);
+}
+.mission-card-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 1px #eef2f7;
+}
+.mission-card-number {
+  font-weight: 800;
+  font-size: 1.55rem;
+  color: #111827;
+  letter-spacing: 0.4px;
+}
+.mission-card-underline {
+  width: 60px;
+  height: 3px;
+  background: #e54848;
+  border-radius: 2px;
+  margin: 12px 0 12px;
+}
+.mission-card-text {
+  color: #6b7280;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+/* Decorative orbs for depth */
+.mission-orb {
+  position: absolute;
+  border-radius: 50%;
+  background: #e5e7eb;
+  opacity: 0.6;
+  filter: blur(0.4px);
+  z-index: 0; /* behind hero and cards */
+}
+.mission-orb.o1 {
+  width: 28px;
+  height: 28px;
+  right: 18%;
+  top: calc(100% - 18px);
+}
+.mission-orb.o2 {
+  width: 46px;
+  height: 46px;
+  right: 6%;
+  top: calc(100% - 32px);
+  opacity: 0.5;
 }
 
 /* Technology Section */
@@ -539,54 +641,32 @@ header {
 }
 
 /* Mission section background (arriere image) with overlay for readability */
+/* Section Mission simple background; internal panel handles the two-tone */
 .section.mission {
   position: relative;
-  background-image: url("img/arriere.png");
-  background-size: cover;
-  background-position: center right;
-  background-repeat: no-repeat;
+  background: transparent;
 }
-
-.section.mission::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  /* light white overlay to keep text readable over the art */
-  background: linear-gradient(
-    rgba(255, 255, 255, 0.72),
-    rgba(255, 255, 255, 0.72)
-  );
-  z-index: 1;
-}
-
-.section.mission .container {
-  position: relative;
-  z-index: 2;
-}
-
-/* Mission Section Gradient Bar */
-.section.mission {
-  position: relative;
-}
-.section.mission::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0%;
-  transform: translateX(-50%);
-  width: 10px;
-  height: 100px;
-  background: linear-gradient(to right, #d82525, #f8faf8);
+.section.mission::before,
+.section.mission::after {
+  content: none;
 }
 
 @media (max-width: 992px) {
-  .section.mission {
-    background-position: center;
+  .mission-hero {
+    grid-template-columns: 1fr;
+    padding: 36px 22px;
   }
-  .text-box::after {
-    left: 18px;
+  .mission-right {
+    order: -1;
+  }
+  .mission-cards {
+    grid-template-columns: 1fr;
+    margin-top: 18px;
+    max-width: 680px;
   }
 }
+
+/* On larger screens keep cards in 3 columns (handled above) */
 
 .tech-step:hover {
   transform: translateY(-6px);
@@ -601,7 +681,7 @@ header {
   width: 56px;
   height: 56px;
   border-radius: 10px;
-  background: var(--light);
+  background: var(--primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -610,7 +690,7 @@ header {
 }
 
 .tech-step-title {
-  font-family: var(--font-heading);
+  font-family: var();
   margin-bottom: 8px;
   font-size: 1.05rem;
 }
@@ -754,7 +834,7 @@ header {
   display: flex;
   justify-content: center;
   margin-bottom: 32px;
-  gap: 10px;
+  gap: 20px;
   flex-wrap: wrap;
 }
 
@@ -773,7 +853,7 @@ header {
 .impact-tab.active {
   background-color: var(--primary);
   color: white;
-  border-color: var(--primary);
+  border-color: var(--accent);
 }
 
 .impact-content {
@@ -825,16 +905,75 @@ header {
 /* Team Section */
 .team-grid {
   display: flex;
-  gap: 32px;
-  justify-content: center;
+  gap: 20px;
+  justify-content: flex-start; /* start from left */
   align-items: stretch;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* single line */
+  overflow-x: auto; /* horizontal scroll if needed */
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px; /* space for scrollbar */
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 100%;
+}
+/* ==========================
+   Team Grid – Responsive
+   ========================== */
+@media (max-width: 768px) {
+  .team-grid {
+    gap: 12px;
+    padding-bottom: 6px; /* small space for scrollbar */
+  }
+  .team-card {
+    flex: 0 0 auto;
+    width: 200px; /* narrower cards on tablets/phones */
+    border-radius: 12px;
+  }
+  .team-img-container {
+    aspect-ratio: 1 / 1; /* Instagram-like square */
+    height: auto;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    overflow: hidden;
+  }
+  .team-meta {
+    padding: 12px 14px;
+  }
+  .team-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .team-role {
+    font-size: 0.85rem;
+    color: #6c757d;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-grid {
+    gap: 10px;
+  }
+  .team-card {
+    width: 170px; /* compact cards on small phones */
+  }
+  .team-img-container {
+    aspect-ratio: 1 / 1; /* keep square */
+    height: auto;
+  }
+  .team-meta {
+    padding: 10px 12px;
+  }
+  .team-name {
+    font-size: 0.9rem;
+  }
+  .team-role {
+    font-size: 0.8rem;
+  }
 }
 
 .team-card {
-  background: #fff;
+  background: #08da1323;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-sm);
   width: 260px;
@@ -842,6 +981,19 @@ header {
   display: flex;
   flex-direction: column;
   transition: var(--transition);
+  flex: 0 0 auto; /* prevent shrinking; stay in one row */
+}
+
+/* Optional: hide scrollbar for WebKit for cleaner look */
+.team-grid::-webkit-scrollbar {
+  height: 8px;
+}
+.team-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+.team-grid::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
 }
 
 .team-card:hover {
@@ -852,7 +1004,7 @@ header {
 .team-img-container {
   position: relative;
   width: 100%;
-  height: 260px;
+  height: 270px;
   overflow: hidden;
 }
 
@@ -861,7 +1013,7 @@ header {
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 12px 12px 0 0;
+  border-radius: 10px 10px 0 0;
 }
 
 .team-overlay {
@@ -923,6 +1075,22 @@ header {
 .team-card-info .role {
   color: var(--grey);
   font-size: 0.98rem;
+}
+
+/* New semantic text block for team cards */
+.team-meta {
+  padding: 18px;
+  text-align: left;
+}
+.team-name {
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+  color: var(--dark);
+}
+.team-role {
+  color: var(--grey);
+  font-size: 1rem;
 }
 
 /* Contact Section */
@@ -1423,4 +1591,14 @@ footer {
   border: none;
   cursor: pointer;
   box-shadow: 0 6px 18px rgba(16, 24, 32, 0.06);
+}
+
+/* Logo size adjustments on mobile */
+@media (max-width: 768px) {
+  .logo { font-size: 1.6rem; letter-spacing: 1px; }
+  .logo-img { height: 40px; }
+}
+@media (max-width: 480px) {
+  .logo { font-size: 1.4rem; letter-spacing: 0.5px; }
+  .logo-img { height: 34px; }
 }

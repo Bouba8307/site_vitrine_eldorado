@@ -259,25 +259,32 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Animation du compteur des statistiques
+  // Animation du compteur des statistiques (supporte data-target et data-suffix)
   document.querySelectorAll(".stat-number").forEach((stat) => {
-    if (stat.textContent !== null) {
-      const endValue = parseInt(stat.textContent.replace("%", ""));
-      if (!isNaN(endValue)) {
-        let start = 0;
-        const duration = 1200;
-        const step = Math.ceil(endValue / (duration / 30));
-        function animateStat() {
-          if (start < endValue) {
-            start += step;
-            stat.textContent = (start > endValue ? endValue : start) + "%";
-            setTimeout(animateStat, 30);
-          } else {
-            stat.textContent = endValue + "%";
-          }
+    const targetAttr = stat.getAttribute("data-target");
+    const suffix = stat.getAttribute("data-suffix") || "";
+    const endValue = targetAttr
+      ? parseInt(targetAttr, 10)
+      : parseInt((stat.textContent || "").replace(/\D/g, ""), 10);
+    if (!isNaN(endValue)) {
+      let start = 0;
+      const duration = 1200;
+      const interval = 30;
+      const steps = Math.max(1, Math.floor(duration / interval));
+      const increment = Math.max(1, Math.round(endValue / steps));
+      const fmt = new Intl.NumberFormat("fr-FR");
+      function animateStat() {
+        start += increment;
+        if (start >= endValue) {
+          stat.textContent = fmt.format(endValue) + suffix;
+        } else {
+          stat.textContent = fmt.format(start) + suffix;
+          setTimeout(animateStat, interval);
         }
-        animateStat();
       }
+      // initialise affichage
+      stat.textContent = fmt.format(0) + suffix;
+      setTimeout(animateStat, interval);
     }
   });
 
@@ -295,14 +302,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Animation des icônes flottantes
   document.querySelectorAll(".floating-icon").forEach((icon) => {
-    icon.addEventListener("mouseenter", () => {
-      icon.style.opacity = "0.7";
-      icon.style.transform = "scale(1.5)";
-    });
-    icon.addEventListener("mouseleave", () => {
-      icon.style.opacity = "0.18";
-      icon.style.transform = "";
-    });
+    if (icon instanceof HTMLElement) {
+      icon.addEventListener("mouseenter", () => {
+        icon.style.opacity = "0.7";
+        icon.style.transform = "scale(1.5)";
+      });
+      icon.addEventListener("mouseleave", () => {
+        icon.style.opacity = "0.18";
+        icon.style.transform = "";
+      });
+    }
   });
 
   // Animation du bouton contact
@@ -365,4 +374,57 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+
+  // Auto-scrolling team grid (single line, continuous loop)
+  (function initTeamAutoScroll() {
+    const grid = document.querySelector(".team-grid");
+    if (!grid) return;
+
+    // Ensure content is long enough for seamless loop: duplicate children once
+    const children = Array.from(grid.children);
+    if (children.length > 0) {
+      const cloneFragment = document.createDocumentFragment();
+      children.forEach((child) =>
+        cloneFragment.appendChild(child.cloneNode(true))
+      );
+      grid.appendChild(cloneFragment);
+    }
+
+    let rafId = 0;
+    let running = true;
+    const speed = 0.6; // pixels per frame
+
+    function step() {
+      if (!running) {
+        rafId = requestAnimationFrame(step);
+        return;
+      }
+      grid.scrollLeft += speed;
+      // Reset to the first half when we've scrolled past the original content width
+      const half = grid.scrollWidth / 2;
+      if (grid.scrollLeft >= half) {
+        grid.scrollLeft -= half;
+      }
+      rafId = requestAnimationFrame(step);
+    }
+
+    // Pause on hover or when focusing inside
+    function pause() {
+      running = false;
+    }
+    function resume() {
+      running = true;
+    }
+    grid.addEventListener("mouseenter", pause);
+    grid.addEventListener("mouseleave", resume);
+    grid.addEventListener("touchstart", pause, { passive: true });
+    grid.addEventListener("touchend", resume, { passive: true });
+    grid.addEventListener("focusin", pause);
+    grid.addEventListener("focusout", resume);
+
+    rafId = requestAnimationFrame(step);
+
+    // Cleanup if needed (in case of SPA navigation later)
+    window.addEventListener("beforeunload", () => cancelAnimationFrame(rafId));
+  })();
 });
