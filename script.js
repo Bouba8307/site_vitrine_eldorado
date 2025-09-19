@@ -94,26 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  const modalClose = document.querySelector(".modal-close");
-  if (modalClose) {
-    modalClose.addEventListener("click", function () {
-      const modal = document.querySelector(".modal");
-      if (modal instanceof HTMLElement) {
-        modal.style.display = "none";
-        modal.setAttribute("aria-hidden", "true");
-      }
-    });
-  }
-
-  window.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
-      const modal = document.querySelector(".modal");
-      if (modal instanceof HTMLElement) {
-        modal.style.display = "none";
-        modal.setAttribute("aria-hidden", "true");
-      }
-    }
-  });
+  const modalClose = document.querySelector(".modal-close"); // legacy modal (unused)
 
   // Animation avancée du diagramme technologie
   function animateProcessFlow() {
@@ -192,10 +173,13 @@ document.addEventListener("DOMContentLoaded", function () {
   // Smooth scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
-      const targetId = this.getAttribute("href");
-      if (targetId === "#" || !document.querySelector(targetId)) return;
-      e.preventDefault();
+      const link = e.currentTarget;
+      if (!(link instanceof HTMLAnchorElement)) return;
+      const targetId = link.getAttribute("href");
+      if (!targetId || targetId === "#") return;
       const targetElement = document.querySelector(targetId);
+      if (!(targetElement instanceof HTMLElement)) return;
+      e.preventDefault();
       window.scrollTo({
         top: targetElement.offsetTop - 80,
         behavior: "smooth",
@@ -203,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document
         .querySelectorAll("nav ul li a")
         .forEach((a) => a.classList.remove("active"));
-      this.classList.add("active");
+      link.classList.add("active");
     });
   });
 
@@ -339,12 +323,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const contactForm = document.querySelector(".contact-form form");
   if (contactForm) {
     contactForm.addEventListener("submit", function (e) {
-      if (this.checkValidity()) {
+      const formEl = e.currentTarget;
+      if (!(formEl instanceof HTMLFormElement)) return;
+      if (formEl.checkValidity()) {
         e.preventDefault();
-        this.classList.add("animate__animated", "animate__fadeOut");
+        formEl.classList.add("animate__animated", "animate__fadeOut");
         setTimeout(() => {
-          this.reset();
-          this.classList.remove("animate__fadeOut");
+          formEl.reset();
+          formEl.classList.remove("animate__fadeOut");
           alert("Message envoyé ! Nous vous répondrons bientôt.");
         }, 800);
       }
@@ -377,17 +363,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Auto-scrolling team grid (single line, continuous loop)
   (function initTeamAutoScroll() {
-    const grid = document.querySelector(".team-grid");
-    if (!grid) return;
+    const gridEl = document.querySelector(".team-grid");
+    if (!(gridEl instanceof HTMLElement)) return;
 
     // Ensure content is long enough for seamless loop: duplicate children once
-    const children = Array.from(grid.children);
+    const children = Array.from(gridEl.children);
     if (children.length > 0) {
       const cloneFragment = document.createDocumentFragment();
       children.forEach((child) =>
         cloneFragment.appendChild(child.cloneNode(true))
       );
-      grid.appendChild(cloneFragment);
+      gridEl.appendChild(cloneFragment);
     }
 
     let rafId = 0;
@@ -399,11 +385,12 @@ document.addEventListener("DOMContentLoaded", function () {
         rafId = requestAnimationFrame(step);
         return;
       }
-      grid.scrollLeft += speed;
+      if (!(gridEl instanceof HTMLElement)) return;
+      gridEl.scrollLeft += speed;
       // Reset to the first half when we've scrolled past the original content width
-      const half = grid.scrollWidth / 2;
-      if (grid.scrollLeft >= half) {
-        grid.scrollLeft -= half;
+      const half = gridEl.scrollWidth / 2;
+      if (gridEl.scrollLeft >= half) {
+        gridEl.scrollLeft -= half;
       }
       rafId = requestAnimationFrame(step);
     }
@@ -415,16 +402,18 @@ document.addEventListener("DOMContentLoaded", function () {
     function resume() {
       running = true;
     }
-    grid.addEventListener("mouseenter", pause);
-    grid.addEventListener("mouseleave", resume);
-    grid.addEventListener("touchstart", pause, { passive: true });
-    grid.addEventListener("touchend", resume, { passive: true });
-    grid.addEventListener("focusin", pause);
-    grid.addEventListener("focusout", resume);
+    gridEl.addEventListener("mouseenter", pause);
+    gridEl.addEventListener("mouseleave", resume);
+    gridEl.addEventListener("touchstart", pause, { passive: true });
+    gridEl.addEventListener("touchend", resume, { passive: true });
+    gridEl.addEventListener("focusin", pause);
+    gridEl.addEventListener("focusout", resume);
 
     rafId = requestAnimationFrame(step);
 
     // Cleanup if needed (in case of SPA navigation later)
     window.addEventListener("beforeunload", () => cancelAnimationFrame(rafId));
   })();
+
+  // Video: no modal; autoplay muted in-card (handled in HTML)
 });

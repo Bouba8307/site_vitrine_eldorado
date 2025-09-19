@@ -64,6 +64,34 @@
         <!-- <a href="#contact" class="btn btn-accent animate__animated animate__pulse animate__infinite">Prendre Contact</a> -->
       </div>
     </section>
+    <!-- Video Presentation Section -->
+    <section class="section video" id="video">
+      <div class="container video-container">
+        <div class="video-left">
+          <span class="video-eyebrow" aria-hidden="true"></span>
+          <h2 class="video-title">Les déchets envahissent<br />Notre écosystème</h2>
+          <p class="video-desc">
+            Comprendre l'ampleur du problème et notre réponse innovante pour
+            transformer les déchets en énergie. Découvrez notre approche en
+            vidéo.
+          </p>
+          <a href="#technology" class="video-cta">En savoir plus <span class="arrow" aria-hidden="true">›</span></a>
+        </div>
+        <div class="video-right">
+            <div class="video-card" aria-label="Présentation vidéo" role="button" tabindex="0">
+              <div class="video-embed" aria-hidden="true">
+                <iframe
+                  src="https://www.youtube.com/watch?v=amBVuXYHZyo&pp=ygUhbGVzIGRlY2hldHMgcGxhc3RpcXVlIGRhbnMgbGEgbWVy"
+                  title="Présentation vidéo"
+                  frameborder="0"
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </div>
+        </div>
+      </div>
+    </section>
     <!-- Mission Section -->
     <section class="section mission" id="mission">
       <div class="container">
@@ -219,41 +247,38 @@
           Des solutions adaptées à différents besoins énergétiques
         </p>
         <div class="solutions-grid">
-          <div class="solution-card">
-            <div class="solution-img img1" style="background-image: url('https://www.google.com/imgres?q=usine%20dans%20le%20foret&imgurl=https%3A%2F%2Fimg.centrefrance.com%2Fa14pnVx6YMri97SZvBa4QwgRKK-y15ILozhf0Nn6EA8%2Frs%3Afill%3A512%3A290%3A1%3A0%2Fg%3Asm%2FbG9jYWw6Ly8vMDAvMDAvMDcvMzYvMTEvMjAwMDAwNzM2MTE2Ng.webp&imgrefurl=https%3A%2F%2Fwww.lamontagne.fr%2Fgueret-23000%2Feconomie%2Frisques-et-nuisances-arguments-economiques-pression-sur-la-foret-en-creuse-la-vigilance-est-toujours-debout-autour-du-projet-d-usine-biosyl_14673324%2F&docid=uJ23wt4sfb6tzM&tbnid=v7DLUAu_W8YlmM&vet=12ahUKEwjBy4K9zOCPAxXKvicCHQJYF8gQM3oECEgQAA..i&w=512&h=290&hcb=2&ved=2ahUKEwjBy4K9zOCPAxXKvicCHQJYF8gQM3oECEgQAA'); background-size: cover; background-position: center; color: #fff;">
+          <article class="solution-card">
+            <div class="solution-img img-zones" style="background-image: url('img/zonev.jpeg'); background-size: cover; background-position: center;">
               Zones vulnérables
             </div>
             <div class="solution-content">
               <h3 class="solution-title">Alimentation des zones sensibles</h3>
               <p>
-                Fournir une source d'énergie fiable aux hôpitaux, écoles et
-                villages isolés, garantissant la continuité des services
-                essentiels.
+                Fournir une source d'énergie fiable aux hôpitaux, écoles et villages isolés,
+                garantissant la continuité des services essentiels.
               </p>
             </div>
-          </div>
-          <div class="solution-card">
-            <div class="solution-img img2">Secteur industriel</div>
+          </article>
+          <article class="solution-card featured">
+            <div class="solution-img img-industrie" style="background-image: url('img/zonei.jpg'); background-size: cover; background-position: center;">Secteur industriel</div>
             <div class="solution-content">
               <h3 class="solution-title">Carburant pour l'industrie</h3>
               <p>
-                Solutions énergétiques pour les petites et moyennes industries,
-                ainsi que pour les équipements miniers, réduisant leur
-                dépendance aux carburants fossiles importés.
+                Solutions énergétiques pour les petites et moyennes industries, ainsi que pour les
+                équipements miniers, afin de réduire la dépendance aux carburants fossiles importés.
               </p>
             </div>
-          </div>
-          <div class="solution-card">
-            <div class="solution-img img3">Distribution</div>
+          </article>
+          <article class="solution-card">
+            <div class="solution-img img-distribution" style="background-image: url('img/zonec.jpg'); background-size: cover; background-position: center;">Distribution</div>
             <div class="solution-content">
               <h3 class="solution-title">Distribution commerciale</h3>
               <p>
-                Approvisionnement des grandes usines et stations-service en
-                carburant alternatif, contribuant à la diversification des
-                sources d'énergie au niveau national.
+                Approvisionnement des grandes usines et stations-service en carburant alternatif, pour
+                diversifier durablement les sources d'énergie au niveau national.
               </p>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>
@@ -640,10 +665,28 @@
           </div>
         </div>
         <div class="footer-bottom">
-          <p>© 2025 Tadji N'Gana. Tous droits réservés.</p>
+          <p>© 2025 EcoTadji. Tous droits réservés.</p>
         </div>
       </div>
     </footer>
+    <!-- Video Modal -->
+    <div class="video-modal" aria-hidden="true">
+      <div class="video-modal-backdrop" data-close="true"></div>
+      <div class="video-modal-dialog" role="dialog" aria-label="Présentation vidéo">
+        <button class="video-modal-close" aria-label="Fermer la vidéo">×</button>
+        <div class="video-modal-body">
+          <div class="video-responsive">
+            <iframe
+              src=""
+              title="Présentation vidéo"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
