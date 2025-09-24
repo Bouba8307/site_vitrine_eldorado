@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tadji N'Gana - Transformation des déchets plastiques en carburant</title>
+    <title>Eco Tadji - Transformation des déchets plastiques en carburant</title>
     <!-- Google Fonts & Animate.css -->
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap"
@@ -14,13 +14,17 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
     <link rel="stylesheet" href="style.css" />
+    <!-- Performance: preconnect and preload critical assets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="img/oil.png" as="image" />
   </head>
   <body>
     <!-- Header -->
     <header class="main-header">
       <div class="container header-container">
         <a href="#" class="logo">
-          <img src="eldo.png" alt="logo" class="logo-img" />
+          <img src="eldo.png" alt="logo" class="logo-img" fetchpriority="high" decoding="async" />
           <span class="logo-text" style="font-weight: bold;color:#2e8b56;">ECO <span class="logo-highlight" style="color:#e52828;">TADJI</span></span>
         </a>
         <nav class="nav-menu">
@@ -78,15 +82,9 @@
           <a href="#technology" class="video-cta">En savoir plus <span class="arrow" aria-hidden="true">›</span></a>
         </div>
         <div class="video-right">
-            <div class="video-card" aria-label="Présentation vidéo" role="button" tabindex="0">
-              <div class="video-embed" aria-hidden="true">
-                <iframe
-                  src="https://www.youtube.com/watch?v=amBVuXYHZyo&pp=ygUhbGVzIGRlY2hldHMgcGxhc3RpcXVlIGRhbnMgbGEgbWVy"
-                  title="Présentation vidéo"
-                  frameborder="0"
-                  allow="autoplay; encrypted-media; picture-in-picture"
-                  allowfullscreen
-                ></iframe>
+            <div class="video-card" aria-label="Présentation vidéo" role="img" tabindex="0">
+              <div class="video-image" aria-hidden="true">
+          <img src="img/arriere.png" alt="Présentation vidéo" style="width:100%;height:auto;" loading="lazy" decoding="async" />
               </div>
             </div>
         </div>
@@ -115,7 +113,7 @@
               <span class="shape s1"></span>
               <span class="shape s2"></span>
               <span class="shape s3"></span>
-              <img src="img/carburant.png" alt="Pyro-fuel" />
+              <img src="img/carburant.png" alt="Pyro-fuel" decoding="async" />
               
             </div>
           </div>
@@ -248,8 +246,9 @@
         </p>
         <div class="solutions-grid">
           <article class="solution-card">
-            <div class="solution-img img-zones" style="background-image: url('img/zonev.jpeg'); background-size: cover; background-position: center;">
-              Zones vulnérables
+            <div class="solution-img img-zones">
+              <img class="solution-photo" src="img/zonev.jpeg" alt="Zones vulnérables" loading="lazy" decoding="async" />
+              <span class="solution-label">Zones vulnérables</span>
             </div>
             <div class="solution-content">
               <h3 class="solution-title">Alimentation des zones sensibles</h3>
@@ -260,7 +259,10 @@
             </div>
           </article>
           <article class="solution-card featured">
-            <div class="solution-img img-industrie" style="background-image: url('img/zonei.jpg'); background-size: cover; background-position: center;">Secteur industriel</div>
+            <div class="solution-img img-industrie">
+              <img class="solution-photo" src="img/zonei.jpg" alt="Secteur industriel" loading="lazy" decoding="async" />
+              <span class="solution-label">Secteur industriel</span>
+            </div>
             <div class="solution-content">
               <h3 class="solution-title">Carburant pour l'industrie</h3>
               <p>
@@ -270,7 +272,10 @@
             </div>
           </article>
           <article class="solution-card">
-            <div class="solution-img img-distribution" style="background-image: url('img/zonec.jpg'); background-size: cover; background-position: center;">Distribution</div>
+            <div class="solution-img img-distribution">
+              <img class="solution-photo" src="img/zonec.jpg" alt="Distribution" loading="lazy" decoding="async" />
+              <span class="solution-label">Distribution</span>
+            </div>
             <div class="solution-content">
               <h3 class="solution-title">Distribution commerciale</h3>
               <p>
@@ -347,7 +352,7 @@
           <!-- Membre 1 -->
           <div class="team-card">
             <div class="team-img-container">
-              <img src="img/sall.jpg" alt="Alhassane Sall" class="team-img" />
+              <img src="img/sall.jpg" alt="Alhassane Sall" class="team-img" loading="lazy" decoding="async" />
               <div class="team-overlay">
                 <div class="team-social">
                   <a href="#" title="Facebook"
@@ -386,6 +391,7 @@
                 src="img/doum.jpg"
                 alt="Aboubakar Doumbia"
                 class="team-img"
+                loading="lazy" decoding="async"
               />
               <div class="team-overlay">
                 <div class="team-social">
@@ -421,7 +427,7 @@
           <!-- Membre 3 -->
           <div class="team-card">
             <div class="team-img-container">
-              <img src="img/Drissa.jpg" alt="Drissa Touré" class="team-img" />
+              <img src="img/Drissa.jpg" alt="Drissa Touré" class="team-img" loading="lazy" decoding="async" />
               <div class="team-overlay">
                 <div class="team-social">
                   <a href="#" title="Facebook"
@@ -456,7 +462,7 @@
           <!-- Membre 4 -->
           <div class="team-card">
             <div class="team-img-container">
-              <img src="img/bouba.jpg" alt="Boubacar Traoré" class="team-img" />
+              <img src="img/bouba.jpg" alt="Boubacar Traoré" class="team-img" loading="lazy" decoding="async" />
               <div class="team-overlay">
                 <div class="team-social">
                   <a href="#" title="Facebook"
@@ -495,6 +501,7 @@
                 src="img/Nantoumee.jpg"
                 alt="Bourama Nantoumé"
                 class="team-img"
+                loading="lazy" decoding="async"
               />
               <div class="team-overlay">
                 <div class="team-social">
@@ -597,7 +604,7 @@
               <div class="info-icon">✉️</div>
               <div class="info-content">
                 <h4>Email</h4>
-                <p>projetTadji N'Gana2020@gmail.com</p>
+                <p>contact@ecotadji.com</p>
               </div>
             </div>
             <!-- Remplace le contenu de .map-container par la carte Google Maps -->
@@ -620,7 +627,7 @@
       <div class="container">
         <div class="footer-container">
           <div class="footer-col">
-            <h3>Tadji N'Gana</h3>
+            <h3>Eco Tadji</h3>
             <p>
               Transformer les déchets plastiques en ressources énergétiques pour
               un avenir plus durable.
