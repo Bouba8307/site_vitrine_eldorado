@@ -32,19 +32,19 @@ body {
 /* Utility Classes */
 .container {
   width: 100%;
-  max-width: 1240px; /* slightly wider for hero */
+  max-width: 1290px; /* slightly wider for hero */
   margin: 0 auto;
-  padding: 0 24px; /* larger inner gutters */
+  padding: 0 6px; /* tighter inner gutters */
 }
 
 .section {
-  padding: 10px 0 60px;
+  padding: 40px 0; /* tighter vertical spacing */
 }
 
 .section-title {
   font-family: var(--font-heading);
   font-size: 2.6rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem; /* reduce gap to subtitle */
   text-align: center;
   color: var(--primary);
   letter-spacing: 0.6px;
@@ -53,7 +53,7 @@ body {
 .section-subtitle {
   font-size: 1.25rem;
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.6rem; /* tighter spacing below subtitle */
   color: var(--grey);
 }
 
@@ -292,7 +292,7 @@ header {
   text-align: center;
   position: relative;
   overflow: hidden;
-  padding: 120px 0 80px;
+  padding: 90px 0 60px;
 }
 
 /* Hero Section background */
@@ -876,7 +876,65 @@ header {
   }
 }
 
+/* Solutions – mobile horizontal scroll */
+@media (max-width: 768px) {
+  .solutions-grid {
+    display: flex; /* override grid for carousel behavior */
+    flex-wrap: nowrap;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding: 0 8px 12px; /* breathing room for scrollbar */
+  }
+  .solutions-grid::-webkit-scrollbar {
+    height: 8px;
+  }
+  .solutions-grid::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .solutions-grid::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+  }
+  .solution-card {
+    flex: 0 0 70%; /* smaller cards on mobile */
+    scroll-snap-align: start;
+  }
+  .solution-img {
+    height: 160px; /* shorter images on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .solution-card {
+    flex: 0 0 65%; /* tighter on small phones */
+  }
+  .solution-img {
+    height: 140px; /* further reduce image height */
+  }
+}
+
 /* Impact Section */
+.section.impact {
+  position: relative;
+  overflow: hidden;
+}
+.section.impact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("img/Arriere_plan.gif") center / cover no-repeat;
+  opacity: 0.18;
+  z-index: 0;
+  pointer-events: none;
+}
+.section.impact > .container {
+  position: relative;
+  z-index: 1;
+}
+
 .impact-tabs {
   display: flex;
   justify-content: center;
@@ -1051,7 +1109,7 @@ header {
 .team-img-container {
   position: relative;
   width: 100%;
-  height: 270px;
+  height: 290px;
   overflow: hidden;
 }
 
@@ -1231,7 +1289,7 @@ footer {
   background: var(--dark);
   color: #fff;
   padding: 70px 0 32px;
-  margin-top: 60px;
+  margin-top: 40px;
 }
 
 .footer-container {
@@ -1355,7 +1413,7 @@ footer {
 
 @media (max-width: 768px) {
   .section {
-    padding: 60px 0;
+    padding: 40px 0;
   }
 
   .section-title {
@@ -1364,7 +1422,7 @@ footer {
 
   .hero {
     min-height: auto;
-    padding: 100px 0 60px;
+    padding: 70px 0 40px;
   }
 
   .hero-title {
@@ -1664,7 +1722,7 @@ footer {
    Video Presentation Section
    =========================== */
 .section.video {
-  padding: 64px 0 44px;
+  padding: 40px 0 28px;
 }
 .video-container {
   display: grid;
